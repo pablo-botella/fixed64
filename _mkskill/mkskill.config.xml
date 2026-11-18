@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mkskill>
+  <version-spec params="major:byte,minor:[0-99],build:word">
+    <version major="0" minor="0" build="1" lock="major">
+      <ts>2026-11-18T22:18:10Z</ts>
+    </version>
+    <label key="title" volatile="true" default-to-ts="true">2026-11-18T22:18:10Z</label>
+    <create file="__publish.bat" git-ignore="true" eol="crlf">
+@echo off
+set TAG={$$$ version $$$}
+git rev-parse -q --verify refs/tags/%TAG% &gt;NUL 2&gt;&amp;1 &amp;&amp; goto :exists
+git ls-remote --exit-code --tags origin %TAG% &gt;NUL 2&gt;&amp;1 &amp;&amp; goto :exists
+git tag %TAG%
+git push origin main --tags
+exit /b 0
+:exists
+echo ERROR: tag %TAG% already exists - run -vinc first
+exit /b 1
+</create>
+  </version-spec>
+  <project id="main" name="fixed64" project-type="Go-Module">
+    <meta>
+      <module>github.com/pablo-botella/fixed64</module>
+      <license>MIT</license>
+      <description>Fixed-point decimal types for Go stored in an int64 — Money64 (four decimals) and Percent64 (two decimals), with string parsing and formatting and no floating point. Use when working with github.com/pablo-botella/fixed64 or when Go code needs money or percentage values that live as integers in memory and in the database.</description>
+    </meta>
+  </project>
+  <version-history max="10">
+    <release version="v0.0.1" ts="2026-11-18T22:18:10Z" title="2026-11-18T22:18:10Z" method="vset"></release>
+    <release version="v0.0.2" ts="2026-11-18T22:17:42Z" title="2026-11-18T22:17:42Z" method="vinc-build"></release></version-history>
+</mkskill>
